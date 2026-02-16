@@ -1,20 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    background-color: #d4d4d4; /* Warna awal putih bersih */
+    background-color: #d4d4d4;
     color: #1a1a1a;
     font-family: 'Courier New', Courier, monospace;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
-    transition: background-color 2s, color 2s; /* Efek perubahan warna pelan */
-    overflow: hidden;
+    padding: 20px;
+    transition: background-color 2s, color 2s;
+    overflow-x: hidden;
 }
 
 .container {
     text-align: center;
     max-width: 600px;
+    width: 100%;
     padding: 20px;
+}
+
+.journal-box {
+    margin-bottom: 30px;
+}
+
+#date-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
 }
 
 .photo-wrapper {
@@ -25,21 +44,27 @@ body {
 #main-photo {
     width: 100%;
     max-width: 400px;
+    height: auto;
     filter: grayscale(0%) brightness(100%);
     transition: all 0.5s ease;
+    display: block;
+    margin: 0 auto;
 }
 
 #diary-content {
     line-height: 1.6;
     font-size: 1.1rem;
+    margin-top: 20px;
+    padding: 0 10px;
 }
 
-/* Kelas khusus untuk efek rusak yang akan dipicu JS */
+/* Efek Glitch */
 .glitch-effect {
     filter: grayscale(100%) contrast(300%) !important;
     transform: scale(1.05) rotate(1deg);
 }
 
+/* Animasi Shake */
 .shake {
     animation: shake 0.1s infinite;
 }
@@ -50,23 +75,23 @@ body {
     100% { transform: translate(1px, -1px); }
 }
 
-/* Efek Pixelate menggunakan manipulasi rendering browser */
+/* Efek Pixelate */
 .pixelated {
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
-    transform: scale(2); /* Memperbesar sedikit agar pixel terlihat kasar */
+    transform: scale(2);
     filter: contrast(500%) grayscale(100%) brightness(50%);
 }
 
-/* Animasi tambahan agar foto tampak 'bergetar' secara acak */
+/* Animasi Glitch Heavy */
 @keyframes glitch-anim {
-  0% { clip: rect(42px, 9999px, 44px, 0); }
-  20% { clip: rect(12px, 9999px, 59px, 0); }
-  40% { clip: rect(86px, 9999px, 93px, 0); }
-  60% { clip: rect(15px, 9999px, 47px, 0); }
-  80% { clip: rect(55px, 9999px, 32px, 0); }
-  100% { clip: rect(90px, 9999px, 100px, 0); }
+    0% { clip: rect(42px, 9999px, 44px, 0); }
+    20% { clip: rect(12px, 9999px, 59px, 0); }
+    40% { clip: rect(86px, 9999px, 93px, 0); }
+    60% { clip: rect(15px, 9999px, 47px, 0); }
+    80% { clip: rect(55px, 9999px, 32px, 0); }
+    100% { clip: rect(90px, 9999px, 100px, 0); }
 }
 
 .glitch-heavy {
@@ -74,6 +99,7 @@ body {
     position: relative;
 }
 
+/* Hidden Archive Section */
 .hidden-archive {
     margin-top: 50px;
     padding: 20px;
@@ -84,57 +110,79 @@ body {
     font-size: 0.8rem;
     color: gray;
     letter-spacing: 2px;
+    cursor: help;
 }
 
 .long-text {
-    opacity: 0; /* Teks defaultnya hilang (gaib) */
-    transition: opacity 0.8s ease; /* Muncul perlahan agar terasa mistis */
-    color: red; /* Warna merah agar kontras saat muncul */
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    color: red;
     font-style: italic;
     margin-top: 15px;
-    user-select: none; /* Mencegah teks sengaja di-highlight */
+    user-select: none;
     filter: blur(1px);
+    font-size: 0.9rem;
+    line-height: 1.5;
 }
 
-/* Saat kursor diarahkan ke area .hidden-archive, .long-text akan muncul */
+/* Hover effect untuk desktop */
 .hidden-archive:hover .long-text {
     opacity: 1;
 }
 
-/* Penyesuaian untuk Mobile agar bisa muncul saat disentuh */
-@media (max-width: 768px) {
+/* Touch effect untuk mobile */
+@media (hover: none) and (pointer: coarse) {
     .hidden-archive:active .long-text {
         opacity: 1;
     }
 }
 
-.content-wrapper {
-    display: flex;
-    align-items: center; /* Teks arsip rata tengah secara vertikal terhadap foto */
-    justify-content: center;
-    gap: 20px; /* Jarak antara foto dan teks arsip */
-    margin: 20px 0;
-}
+/* ===== RESPONSIVE MOBILE ===== */
 
-/* Pastikan hidden-archive tidak memiliki margin-top yang merusak posisi */
-.hidden-archive {
-    flex: 1; /* Biarkan teks mengambil sisa ruang */
-    text-align: left; /* Teks arsip rata kiri agar lebih rapi di samping foto */
-    margin-top: 0; 
-    border-top: none;
-    border-left: 1px solid rgba(0,0,0,0.1); /* Pindahkan garis ke samping */
-    padding-left: 15px;
-}
-
-
-
-
-/* responsif mobile */
-
-/* Pengaturan untuk perangkat Mobile (Layar di bawah 768px) */
+/* Tablet dan Mobile Landscape */
 @media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
     .container {
-        width: 90%; /* Memberi ruang di sisi kiri dan kanan */
+        width: 100%;
+        padding: 15px;
+    }
+
+    #date-text {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+
+    #main-photo {
+        max-width: 100%;
+    }
+
+    #diary-content {
+        font-size: 1rem;
+        margin-top: 15px;
+        padding: 0 5px;
+    }
+
+    .hidden-archive {
+        margin-top: 40px;
+        padding: 15px;
+    }
+
+    .long-text {
+        font-size: 0.85rem;
+    }
+}
+
+/* Mobile Portrait (Phone) */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+        min-height: 100vh;
+    }
+
+    .container {
         padding: 10px;
     }
 
@@ -143,23 +191,39 @@ body {
         margin-bottom: 10px;
     }
 
-    #main-photo {
-        max-width: 100%; /* Foto akan mengikuti lebar layar HP */
-        height: auto;
-    }
-
     #diary-content {
-        font-size: 1rem; /* Ukuran teks yang nyaman dibaca di HP */
-        margin-top: 15px;
+        font-size: 0.95rem;
+        line-height: 1.5;
     }
 
-    /* Penyesuaian efek teks mengikuti kursor untuk layar sentuh */
-    /* Karena di HP tidak ada kursor, teks akan muncul di bawah sentuhan jari */
+    .hidden-archive {
+        margin-top: 30px;
+        padding: 10px;
+    }
+
+    .secret-trigger {
+        font-size: 0.7rem;
+    }
+
+    .long-text {
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+
+    /* Penyesuaian untuk teks mengikuti jari */
+    #diary-content.following-touch {
+        font-size: 1.2rem !important;
+        z-index: 9999;
+    }
 }
 
-/* Tambahan untuk layar sangat kecil (di bawah 480px) */
-@media (max-width: 480px) {
+/* Very Small Screens */
+@media (max-width: 360px) {
     #diary-content {
         font-size: 0.9rem;
+    }
+
+    .long-text {
+        font-size: 0.75rem;
     }
 }
