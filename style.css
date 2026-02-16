@@ -1,0 +1,115 @@
+body {
+    background-color: #d4d4d4; /* Warna awal putih bersih */
+    color: #1a1a1a;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    transition: background-color 2s, color 2s; /* Efek perubahan warna pelan */
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.photo-wrapper {
+    margin: 20px 0;
+    cursor: pointer;
+}
+
+#main-photo {
+    width: 100%;
+    max-width: 400px;
+    filter: grayscale(0%) brightness(100%);
+    transition: all 0.5s ease;
+}
+
+#diary-content {
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+/* Kelas khusus untuk efek rusak yang akan dipicu JS */
+.glitch-effect {
+    filter: grayscale(100%) contrast(300%) !important;
+    transform: scale(1.05) rotate(1deg);
+}
+
+.shake {
+    animation: shake 0.1s infinite;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px); }
+    50% { transform: translate(-1px, -2px); }
+    100% { transform: translate(1px, -1px); }
+}
+
+/* Efek Pixelate menggunakan manipulasi rendering browser */
+.pixelated {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    transform: scale(2); /* Memperbesar sedikit agar pixel terlihat kasar */
+    filter: contrast(500%) grayscale(100%) brightness(50%);
+}
+
+/* Animasi tambahan agar foto tampak 'bergetar' secara acak */
+@keyframes glitch-anim {
+  0% { clip: rect(42px, 9999px, 44px, 0); }
+  20% { clip: rect(12px, 9999px, 59px, 0); }
+  40% { clip: rect(86px, 9999px, 93px, 0); }
+  60% { clip: rect(15px, 9999px, 47px, 0); }
+  80% { clip: rect(55px, 9999px, 32px, 0); }
+  100% { clip: rect(90px, 9999px, 100px, 0); }
+}
+
+.glitch-heavy {
+    animation: glitch-anim 0.2s infinite linear alternate-reverse;
+    position: relative;
+}
+
+
+
+
+
+
+/* responsif mobile */
+
+/* Pengaturan untuk perangkat Mobile (Layar di bawah 768px) */
+@media (max-width: 768px) {
+    .container {
+        width: 90%; /* Memberi ruang di sisi kiri dan kanan */
+        padding: 10px;
+    }
+
+    #date-text {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    #main-photo {
+        max-width: 100%; /* Foto akan mengikuti lebar layar HP */
+        height: auto;
+    }
+
+    #diary-content {
+        font-size: 1rem; /* Ukuran teks yang nyaman dibaca di HP */
+        margin-top: 15px;
+    }
+
+    /* Penyesuaian efek teks mengikuti kursor untuk layar sentuh */
+    /* Karena di HP tidak ada kursor, teks akan muncul di bawah sentuhan jari */
+}
+
+/* Tambahan untuk layar sangat kecil (di bawah 480px) */
+@media (max-width: 480px) {
+    #diary-content {
+        font-size: 0.9rem;
+    }
+}
