@@ -74,7 +74,39 @@ body {
     position: relative;
 }
 
+.hidden-archive {
+    margin-top: 50px;
+    padding: 20px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
 
+.secret-trigger {
+    font-size: 0.8rem;
+    color: gray;
+    letter-spacing: 2px;
+}
+
+.long-text {
+    opacity: 0; /* Teks defaultnya hilang (gaib) */
+    transition: opacity 0.8s ease; /* Muncul perlahan agar terasa mistis */
+    color: red; /* Warna merah agar kontras saat muncul */
+    font-style: italic;
+    margin-top: 15px;
+    user-select: none; /* Mencegah teks sengaja di-highlight */
+    filter: blur(1px);
+}
+
+/* Saat kursor diarahkan ke area .hidden-archive, .long-text akan muncul */
+.hidden-archive:hover .long-text {
+    opacity: 1;
+}
+
+/* Penyesuaian untuk Mobile agar bisa muncul saat disentuh */
+@media (max-width: 768px) {
+    .hidden-archive:active .long-text {
+        opacity: 1;
+    }
+}
 
 
 
