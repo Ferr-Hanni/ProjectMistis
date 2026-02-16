@@ -108,6 +108,24 @@ body {
     }
 }
 
+.content-wrapper {
+    display: flex;
+    align-items: center; /* Teks arsip rata tengah secara vertikal terhadap foto */
+    justify-content: center;
+    gap: 20px; /* Jarak antara foto dan teks arsip */
+    margin: 20px 0;
+}
+
+/* Pastikan hidden-archive tidak memiliki margin-top yang merusak posisi */
+.hidden-archive {
+    flex: 1; /* Biarkan teks mengambil sisa ruang */
+    text-align: left; /* Teks arsip rata kiri agar lebih rapi di samping foto */
+    margin-top: 0; 
+    border-top: none;
+    border-left: 1px solid rgba(0,0,0,0.1); /* Pindahkan garis ke samping */
+    padding-left: 15px;
+}
+
 
 
 
